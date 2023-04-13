@@ -38,13 +38,14 @@
     function showPosition(position) {
     x.innerHTML="Geolocation:<br>"+"Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;  
-    const api_url = 
-      "http://localhost:9090//api/v1/getapitest?CNumber=4522121215&longitude="+position.coords.longitude+"&latitude="+position.coords.latitude;
+    //const api_url = 
+      //"http://localhost:9090//api/v1/getapitest?CNumber=4522121215&longitude="+position.coords.longitude+"&latitude="+position.coords.latitude;
+      const api_url="https://reqres.in/api/users?page=2";
       console.log(api_url); 
       //getapi(api_url);
       const xhttp = new XMLHttpRequest();
       xhttp.onload = function() {
-        x.innerHTML = this.responseText;
+        x.innerHTML += "<br>"+this.responseText;
      }
       xhttp.open("GET", api_url);
       xhttp.send();
