@@ -45,7 +45,7 @@
       //getapi(api_url);
       const xhttp = new XMLHttpRequest();
       xhttp.onload = function() {
-        x.innerHTML += "<br>"+this.responseText;
+        x.innerHTML += "<br>"+"Api called successfully";
      }
       xhttp.open("GET", api_url);
       xhttp.send();
