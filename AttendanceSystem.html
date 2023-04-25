@@ -29,11 +29,11 @@ font-weight: bold;">Time In</button>&nbsp;<button type="button" onclick="timeOut
     width: 100px;
     height: 32px;
     font-weight: bold;">Time Out</button><br>
-     <p id="success" style="color: #233A78;
-     font-size: 45px;
+     <p id="success" style="color: green;
+     font-size: 20px;
      font-weight: bold;"></p>
      <p id="error" style="color: red;
-     font-size: 45px;
+     font-size: 20px;
      font-weight: bold;"></p>
 </center>
 <script>
@@ -86,46 +86,58 @@ font-weight: bold;">Time In</button>&nbsp;<button type="button" onclick="timeOut
     x.innerHTML="GPS Disabled";
     }
     function timeIn() {   
-        var y = document.getElementById("success");
-        y.innerHTML="";
-    var empid=document.getElementById("empid").value;
-    console.log(latitude);
-    
-    const api_url="http://localhost:9090//attendance?requestType=time In"+"&empID="+empid+"&longitude="+longitude+"&latitude="+latitude;
-    document.getElementById("empid").value="";
-      console.log(api_url); 
-      //getapi(api_url);
-      const xhttp = new XMLHttpRequest();
-      xhttp.onload = function() {
-        x.innerHTML += "<br>"+"Api called successfully";
-        console.log("timeIn");
-     }
-      xhttp.open("GET", api_url);
-      xhttp.send();      
-      console.log("successfully called time in api");
-      
-      y.innerHTML += "<br>"+"your time in entry has been successfully submitted";
+      var empid=document.getElementById("empid").value;
+      var y = document.getElementById("success");
+      y.innerHTML="";  
+      if(empid!=undefined && empid!=null && empid!=""){   
+                 
+        console.log(latitude);
+        
+        const api_url="http://localhost:9090//attendance?requestType=time In"+"&empID="+empid+"&longitude="+longitude+"&latitude="+latitude;
+        document.getElementById("empid").value="";
+          console.log(api_url); 
+          //getapi(api_url);
+          const xhttp = new XMLHttpRequest();
+          xhttp.onload = function() {
+            x.innerHTML += "<br>"+"Api called successfully";
+            console.log("timeIn");
+        }
+          xhttp.open("GET", api_url);
+          xhttp.send();      
+          console.log("successfully called time in api");
+          
+          y.innerHTML += "<br>"+"your time in entry has been successfully submitted";
+      }else{        
+        alert("please enter your employee ID");        
+      }
     }
     function timeOut() {
-        var y = document.getElementById("success");
-        y.innerHTML="";
-        var empid=document.getElementById("empid").value;
-        console.log(latitude);  
+      var empid=document.getElementById("empid").value;
+      var y = document.getElementById("success");
+      y.innerHTML=" ";
+      if(empid!=undefined && empid!=null && empid!=""){          
+            
+            console.log(latitude);  
+            
+            const api_url="http://localhost:9090//attendance?requestType=time Out"+"&empID="+empid+"&longitude="+longitude+"&latitude="+latitude;
+            document.getElementById("empid").value="";
+          console.log(api_url); 
+          //getapi(api_url);
+          const xhttp = new XMLHttpRequest();
+          xhttp.onload = function() {
+            x.innerHTML += "<br>"+"Api called successfully";
+            console.log("timeout");
+        }
+          xhttp.open("GET", api_url);
+          xhttp.send();
+          console.log("successfully called time out api");
+          
+          y.innerHTML += "<br>"+"your time out entry has been successfully submitted";        
+      }else{
         
-        const api_url="http://localhost:9090//attendance?requestType=time Out"+"&empID="+empid+"&longitude="+longitude+"&latitude="+latitude;
-        document.getElementById("empid").value="";
-      console.log(api_url); 
-      //getapi(api_url);
-      const xhttp = new XMLHttpRequest();
-      xhttp.onload = function() {
-        x.innerHTML += "<br>"+"Api called successfully";
-        console.log("timeout");
-     }
-      xhttp.open("GET", api_url);
-      xhttp.send();
-      console.log("successfully called time out api");
-      
-      y.innerHTML += "<br>"+"your time out entry has been successfully submitted";
+        alert("please enter your employee ID");
+       
+      } 
     }
 </script>
 
