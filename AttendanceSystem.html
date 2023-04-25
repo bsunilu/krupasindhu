@@ -28,9 +28,13 @@ font-weight: bold;">Time In</button>&nbsp;<button type="button" onclick="timeOut
     color: #233A78;
     width: 100px;
     height: 32px;
-    font-weight: bold;">Time Out</button><br><br>
-     <p id="success"></p>
-     <p id="error"></p>
+    font-weight: bold;">Time Out</button><br>
+     <p id="success" style="color: #233A78;
+     font-size: 45px;
+     font-weight: bold;"></p>
+     <p id="error" style="color: red;
+     font-size: 45px;
+     font-weight: bold;"></p>
 </center>
 <script>
     var x = document.getElementById("geo");
@@ -100,7 +104,7 @@ font-weight: bold;">Time In</button>&nbsp;<button type="button" onclick="timeOut
       xhttp.send();      
       console.log("successfully called time in api");
       
-      y.innerHTML += "<br>"+"successfully called time in";
+      y.innerHTML += "<br>"+"your time in entry has been successfully submitted";
     }
     function timeOut() {
         var y = document.getElementById("success");
@@ -121,7 +125,7 @@ font-weight: bold;">Time In</button>&nbsp;<button type="button" onclick="timeOut
       xhttp.send();
       console.log("successfully called time out api");
       
-      y.innerHTML += "<br>"+"successfully called time out";
+      y.innerHTML += "<br>"+"your time out entry has been successfully submitted";
     }
 </script>
 
