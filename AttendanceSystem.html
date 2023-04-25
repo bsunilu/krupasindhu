@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+ <p id="geo" hidden></p>
+ <p id="success"></p>
+ <p id="error"></p>
+<center>
+<p style="color: #233A78;
+font-size: 45px;
+font-weight: bold;">
+        Welcome To Contata Solutions</p>
+<p style="font-size: 30px; color: #233A78;font-weight: bold;">Enter your key</p>
+<input type="text" id="empid" name="empid" style="height:40px;width: 200px;"><br><br>
+<button type="button"  onclick="timeIn()" style=" border: solid 1px #233A78;
+border-right-width: 2px;
+border-bottom-width: 2px;
+padding: 1px 10px 1px 25px;
+background: #F7F7F7  no-repeat 5px center;
+cursor: pointer;
+color: #233A78;
+width: 100px;
+height: 32px;
+font-weight: bold;">Time In</button>&nbsp;<button type="button" onclick="timeOut()" style=" border: solid 1px #233A78;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    padding: 1px 10px 1px 25px;
+    background: #F7F7F7  no-repeat 5px center;
+    cursor: pointer;
+    color: #233A78;
+    width: 100px;
+    height: 32px;
+    font-weight: bold;">Time Out</button>
+</center>
+<script>
+    var x = document.getElementById("geo");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            // Success function
+            showPosition, 
+            // Error function
+            showError, 
+            // Options. See MDN for details.
+            {
+               enableHighAccuracy: true,
+               timeout: 5000,
+               maximumAge: 0
+            });
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    let latitude;
+    let longitude;
+    function showPosition(position) {    
+    x.innerHTML="Geolocation:<br>"+"Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;  
+    latitude=position.coords.latitude;
+    longitude=position.coords.longitude;
+    //const api_url = 
+      //"http://localhost:9090//api/v1/getapitest?CNumber=4522121215&longitude="+position.coords.longitude+"&latitude="+position.coords.latitude;
+      const api_url="https://reqres.in/api/users?page=2";
+      console.log(api_url); 
+      //getapi(api_url);
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+        x.innerHTML += "<br>"+"Api called successfully";
+     }
+      xhttp.open("GET", api_url);
+      xhttp.send();
+      console.log("successfully called api");
+     
+  }
+  async function getapi(url) {    
+    // Storing response
+     await fetch(url);    
+    // Storing data in form of JSON
+   // var data = await response.json();
+    console.log("success");    
+}
+
+    function showError() {
+    x.innerHTML="GPS Disabled";
+    }
+    function timeIn() {   
+        var y = document.getElementById("success");
+        y.innerHTML="";
+    var empid=document.getElementById("empid").value;
+    console.log(latitude);
+    
+    const api_url="http://localhost:9090//attendance?requestType=time In"+"&empID="+empid+"&longitude="+longitude+"&latitude="+latitude;
+    document.getElementById("empid").value="";
+      console.log(api_url); 
+      //getapi(api_url);
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+        x.innerHTML += "<br>"+"Api called successfully";
+        console.log("timeIn");
+     }
+      xhttp.open("GET", api_url);
+      xhttp.send();      
+      console.log("successfully called time in api");
+      
+      y.innerHTML += "<br>"+"successfully called time in";
+    }
+    function timeOut() {
+        var y = document.getElementById("success");
+        y.innerHTML="";
+        var empid=document.getElementById("empid").value;
+        console.log(latitude);  
+        
+        const api_url="http://localhost:9090//attendance?requestType=time Out"+"&empID="+empid+"&longitude="+longitude+"&latitude="+latitude;
+        document.getElementById("empid").value="";
+      console.log(api_url); 
+      //getapi(api_url);
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+        x.innerHTML += "<br>"+"Api called successfully";
+        console.log("timeout");
+     }
+      xhttp.open("GET", api_url);
+      xhttp.send();
+      console.log("successfully called time out api");
+      
+      y.innerHTML += "<br>"+"successfully called time out";
+    }
+</script>
+
+</body>
+</html>
